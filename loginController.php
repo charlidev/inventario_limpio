@@ -1,10 +1,19 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <?php
     require 'db_connection.php';
     session_start();
     $usuario = $_POST['usuario'];
-    $contraseña =$_POST['contraseña'];
+    $contraseña = $_POST['contraseña'];
     if(empty($usuario) || empty($contraseña)){
-        echo "Llene todos los campos";
+        echo "<script>
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Por favor, completa todos los campos',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+              </script>";
     }
     else{
         $tsql = "SELECT * FROM tblLogin WHERE Usuario = ? AND Contrasena = ?";
