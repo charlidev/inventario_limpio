@@ -13,9 +13,11 @@
                 text: 'Por favor, completa todos los campos',
                 icon: 'error',
                 confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = 'login.php';
             });
         });
-      </script>";
+        </script>";
     }
     else{
         $tsql = "SELECT * FROM tblLogin WHERE Usuario = ? AND Contrasena = ?";
@@ -35,6 +37,8 @@
                     text: 'Usuario no encontrado.',
                     icon: 'error',
                     confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = 'login.php';
                 });
             });
           </script>";
