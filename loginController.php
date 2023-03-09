@@ -7,13 +7,15 @@
     $contraseña = $_POST['contraseña'];
     if(empty($usuario) || empty($contraseña)){
         echo "<script>
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Por favor, completa todos los campos',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-              </script>";
+        window.addEventListener('DOMContentLoaded', () => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Por favor, completa todos los campos',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+      </script>";
     }
     else{
         $tsql = "SELECT * FROM tblLogin WHERE Usuario = ? AND Contrasena = ?";
@@ -26,7 +28,16 @@
             header("Location: dashboard.php"); //redirigir al usuario al dashboard después de iniciar sesión
         }
         else{ //accion si no se encuentra el registro
-            echo "Usuario no encontrado.";
+            echo "<script>
+            window.addEventListener('DOMContentLoaded', () => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Usuario no encontrado.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            });
+          </script>";
         }
         sqlsrv_close($connection);
     }

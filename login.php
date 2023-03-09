@@ -31,7 +31,7 @@
                                 </div>
                                 <br>
                                 <div class="input-field">
-                                    <button type="submit" class="submit" name="btnIngresar" onclick="loginUsuario()">Iniciar Sesión</button>
+                                    <button type="submit" class="submit" name="btnIngresar" >Iniciar Sesión</button>
                                 </div>
                             </div>
                         </form>
