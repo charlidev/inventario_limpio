@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Inicio de Sesión</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -31,7 +32,7 @@
                                 </div>
                                 <br>
                                 <div class="input-field">
-                                    <button type="submit" class="submit" name="btnIngresar" >Iniciar Sesión</button>
+                                    <button type="submit" class="submit" name="btnIngresar" id="btn-login" >Iniciar Sesión</button>
                                 </div>
                             </div>
                         </form>
@@ -40,6 +41,47 @@
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+        <script>
+    $(document).ready(function(){
+        $("#btn-login").click(function(e){
+        e.preventDefault(); //Previene la recarga de la página
+
+        var usuario = $("#user").val();
+        var contraseña = $("#pass").val();
+
+        if(usuario == "" || contraseña == ""){
+            Swal.fire({
+                title: 'Error!',
+                text: 'Por favor, completa todos los campos',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "loginController.php",
+            data: {usuario: usuario, contraseña: contraseña},
+            success: function(response){
+                if(response == "Success"){
+                    window.location.href = "dashboard.php";
+                }
+                else{
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Usuario no encontrado.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    $("#user").val('');
+                    $("#pass").val('');
+                }
+                }
+            });
+        });
+    });
+    </script>
+
 </body>
 </html>

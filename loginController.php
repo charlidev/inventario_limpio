@@ -5,21 +5,7 @@
     session_start();
     $usuario = $_POST['usuario'];
     $contraseña = $_POST['contraseña'];
-    if(empty($usuario) || empty($contraseña)){
-        echo "<script>
-        window.addEventListener('DOMContentLoaded', () => {
-            Swal.fire({
-                title: 'Error!',
-                text: 'Por favor, completa todos los campos',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            }).then(() => {
-                window.location.href = 'login.php';
-            });
-        });
-        </script>";
-    }
-    else{
+    
         $tsql = "SELECT * FROM tblLogin WHERE Usuario = ? AND Contrasena = ?";
         $params = array($_POST['usuario'], $_POST['contraseña']);
 
@@ -27,23 +13,7 @@
 
         if($row = sqlsrv_fetch_array($stmt)){ //validamos si se encontro el registro
             $_SESSION['username'] = $usuario;
-            header("Location: dashboard.php"); //redirigir al usuario al dashboard después de iniciar sesión
-        }
-        else{ //accion si no se encuentra el registro
-            echo "<script>
-            window.addEventListener('DOMContentLoaded', () => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Usuario no encontrado.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = 'login.php';
-                });
-            });
-          </script>";
+            echo "Success";  
         }
         sqlsrv_close($connection);
-    }
-
 ?>
