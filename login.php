@@ -42,45 +42,45 @@
     </div>
 
         <script>
-    $(document).ready(function(){
-        $("#btn-login").click(function(e){
-        e.preventDefault(); //Previene la recarga de la página
+            $(document).ready(function(){
+            $("#btn-login").click(function(e){
+            e.preventDefault(); //Previene la recarga de la página
 
-        var usuario = $("#user").val();
-        var contraseña = $("#pass").val();
+            var usuario = $("#user").val();
+            var contraseña = $("#pass").val();
 
-        if(usuario == "" || contraseña == ""){
-            Swal.fire({
-                title: 'Error!',
-                text: 'Por favor, completa todos los campos',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-            return false;
-        }
+            if(usuario == "" || contraseña == ""){
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Por favor, completa todos los campos',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return false;
+            }
 
-        $.ajax({
-            type: "POST",
-            url: "loginController.php",
-            data: {usuario: usuario, contraseña: contraseña},
-            success: function(response){
-                if(response == "Success"){
-                    window.location.href = "dashboard.php";
-                }
-                else{
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Usuario no encontrado.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    $("#user").val('');
-                    $("#pass").val('');
-                }
-                }
+            $.ajax({
+                type: "POST",
+                url: "loginController.php",
+                data: {usuario: usuario, contraseña: contraseña},
+                success: function(response){
+                    if(response == "Success"){
+                        window.location.href = "dashboard.php";
+                    }
+                    else{
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Usuario no encontrado.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                        $("#user").val('');
+                        $("#pass").val('');
+                    }
+                    }
+                });
             });
         });
-    });
     </script>
 
 </body>

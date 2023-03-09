@@ -12,8 +12,9 @@
         $stmt = sqlsrv_query($connection, $tsql, $params);
 
         if($row = sqlsrv_fetch_array($stmt)){ //validamos si se encontro el registro
-            $_SESSION['username'] = $usuario;
-            echo "Success";  
+            $_SESSION['username'] = $usuario;  
+        }else{
+            
         }
         sqlsrv_close($connection);
 ?>
