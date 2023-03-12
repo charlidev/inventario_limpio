@@ -45,11 +45,13 @@
             $(document).ready(function(){
             $("#btn-login").click(function(e){
             e.preventDefault(); //Previene la recarga de la página
+            
+            let data = {    
+                'usuario': $('#user').val(),
+                'contraseña' : $('#pass').val()
+            }
 
-            var usuario = $("#user").val();
-            var contraseña = $("#pass").val();
-
-            if(usuario == "" || contraseña == ""){
+            if(data.usuario == "" || data.contraseña == ""){
                 Swal.fire({
                     title: 'Error!',
                     text: 'Por favor, completa todos los campos',
@@ -62,10 +64,12 @@
             $.ajax({
                 type: "POST",
                 url: "loginController.php",
-                data: {usuario: usuario, contraseña: contraseña},
-                success: function(response){
-                    if(response == "Success"){
-                        window.location.href = "dashboard.php";
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.status == 1){
+                        
+                        window.location.replace("dashboard.php");
                     }
                     else{
                         Swal.fire({
